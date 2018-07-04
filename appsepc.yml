@@ -1,0 +1,30 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /var/www/html/
+permissions:
+   - object: /var/www/html/
+     pattern: "**"
+     owner: root
+     group: root
+     mode: 777
+     type:
+       - file
+permissions:
+   - object: /var/www/html/
+     pattern: "**"
+     owner: root
+     group: root
+     mode: 777
+     type:
+       - directory  
+hooks:
+  BeforeInstall:
+    - location: scripts/delete.sh
+      timeout: 300
+      runas: root
+  ApplicationPermission:
+    - location: scripts/change_permissions.sh
+      timeout: 300
+      runas: root
